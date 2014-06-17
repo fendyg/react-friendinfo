@@ -1,0 +1,22 @@
+{
+    "data": [
+        {
+            "name": "Andy",
+            "sex": "M",
+            "birthday": "1990/01/01",
+            "email": "andy@andy.com"
+        },
+        {
+            "name": "Brian",
+            "sex": "M",
+            "birthday": "1990/01/02",
+            "email": "brian@brian.com"
+        },
+        {
+            "name": "Candy",
+            "sex": "F",
+            "birthday": "1990/01/03",
+            "email": "candy@candy.com"
+        }
+    ]
+}
