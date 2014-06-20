@@ -3,19 +3,31 @@
  */
 
 var InputBox = React.createClass({
+    render: function() {
+        return (
+            <input type="text"
+            className="form-control"
+            placeholder={this.props.placeHolderText}
+            onChange={this.props.handleInputChange} />
+        );
+    }
+});
+
+var MainContent = React.createClass({
+    render: function(){
+        return (
+            <div className="results">
+                {this.props.resultSet}
+            </div>
+        );
+    }
+});
+
+var ListContainer = React.createClass({
     getInitialState: function(){
         return {
             resultSet: 'Loading data..',
         }
-    },
-
-    onInputChange: function(e){
-        var query = e.target.value,
-            filteredResult = _.filter(this.state.birthdayJSON, function(num){
-                return num.name.toLowerCase().indexOf(query) >= 0;
-            });
-
-        this.setState({resultSet: filteredResult});
     },
 
     componentDidMount: function(){
@@ -27,20 +39,31 @@ var InputBox = React.createClass({
         }.bind(this));
     },
 
+    handleInputChange: function(e){
+        var query = e.target.value,
+            filteredResult = _.filter(this.state.birthdayJSON, function(num){
+                return num.name.toLowerCase().indexOf(query) >= 0;
+            });
+
+        this.setState({resultSet: filteredResult});
+    },
+
     render: function() {
-        return new React.DOM.div({},
-            new React.DOM.input({
-                placeholder: this.props.placeholderText,
-                onChange: this.onInputChange
-            }),
-            new React.DOM.p({}, this.state.resultSet)
-        )
+        var placeholderText = "Type a name..";
+
+        return (
+            <div>
+                <InputBox
+                    placeHolderText={placeholderText}
+                    handleInputChange={this.handleInputChange}
+                />
+                <MainContent resultSet={this.state.resultSet} />
+            </div>
+        );
     }
 });
 
 React.renderComponent(
-    InputBox({
-        placeholderText: 'Type a name..',
-    }),
+    <ListContainer />,
     document.getElementById('container')
 );

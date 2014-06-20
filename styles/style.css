@@ -1,0 +1,121 @@
+html,body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    min-height: 100%;
+    color: white;
+
+    background: #3a3a39; /* Old browsers */
+    background: -moz-linear-gradient(top,  #3a3a39 0%, #26262b 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3a3a39), color-stop(100%,#26262b)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #3a3a39 0%, #26262b 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #3a3a39 0%, #26262b 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #3a3a39 0%, #26262b 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #3a3a39 0%, #26262b 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3a3a39', endColorstr='#26262b',GradientType=0 ); /* IE6-9 */
+}
+
+.namecards-container {
+    width: 600px;
+    height: 170px;
+    background-color: #3c393e;
+}
+
+.namecards-container a:hover {
+    opacity: 0.8;
+}
+
+.namecards-container .name-holder,
+.namecards-container .info-holder,
+.namecards-container .socmed-holder {
+    display: inline-block;
+    height: 100%;
+    float: left;
+}
+
+.namecards-container .name-holder {
+    width: 185px;
+    background-color: #493843;
+    text-align: center;
+}
+
+.namecards-container .name-holder .nickname {
+    font-size: 16px;
+    color: #cee2ff;
+    margin-top: 35px;
+}
+
+.namecards-container .name-holder .fullname {
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.namecards-container .name-holder .title {
+    margin-top: 5px;
+    font-size: 17px;
+    color: #939397;
+}
+
+.namecards-container .info-holder {
+    width: 355px;
+    background-color: #3f3940;
+    padding: 5px;
+}
+
+.namecards-container .info-holder .glyphicon {
+    font-size: 16px;
+    color: #c9dcf6;
+}
+
+.namecards-container .info-holder div {
+    margin: 8px 10px;
+}
+
+.namecards-container .info-holder .header {
+    display: inline-block;
+    width: 50px;
+    margin: 0 20px;
+    font-size: 14px;
+    color: #8a8a8f;
+}
+
+.namecards-container .info-holder .value {
+    font-size: 16px;
+    color: #d4d7dc;
+}
+.namecards-container .info-holder .value a{
+    color: #bed3f4;
+    text-decoration: none;
+    border-bottom: 1px #3276be dashed;
+}
+
+.namecards-container .socmed-holder {
+    width: 60px;
+    height: 145px;
+    margin-top: 12px;
+    border-left: 1px #a1a0a1 solid;
+}
+
+.namecards-container .socmed-holder a {
+    display: block;
+    width: 32px;
+    height: 32px;
+    background-image: url(../images/socmed-icons.png);
+    margin: 4px 14px;
+}
+
+.namecards-container .socmed-holder .icon.twitter {background-position: 96px 0;}
+.namecards-container .socmed-holder .icon.linkedin {background-position: 64px 0;}
+.namecards-container .socmed-holder .icon.instagram {background-position: 32px 0;}
+
+.namecards-container .socmed-holder .icon.disabled {
+    cursor: default;
+    opacity: 0.4;
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
