@@ -1,22 +1,46 @@
 {
     "data": [
         {
-            "name": "Andy",
-            "sex": "M",
-            "birthday": "1990/01/01",
-            "email": "andy@andy.com"
+            "fullname": "Andy Jones",
+            "nickname": "andy",
+            "title": "Business Analyst",
+            "birthday": "01 January 1990",
+            "email": "andy@andy.com",
+            "phone": "",
+            "location": "Tokyo, JP",
+            "work": "Mitsuho, Inc.",
+            "facebook": "",
+            "twitter": "",
+            "linkedin": "",
+            "instagram": ""
         },
         {
-            "name": "Brian",
-            "sex": "M",
-            "birthday": "1990/01/02",
-            "email": "brian@brian.com"
+            "fullname": "Brian Jones",
+            "nickname": "bones",
+            "title": "Barista",
+            "birthday": "02 January 1990",
+            "email": "",
+            "phone": "+62 81 123-5478",
+            "location": "Singapore, SG",
+            "work": "",
+            "facebook": "",
+            "twitter": "",
+            "linkedin": "",
+            "instagram": ""
         },
         {
-            "name": "Candy",
-            "sex": "F",
-            "birthday": "1990/01/03",
-            "email": "candy@candy.com"
+            "fullname": "Candy Jones",
+            "nickname": "centy",
+            "title": "Analyst",
+            "birthday": "03 January 1990",
+            "email": "candy@candy.com",
+            "phone": "+62 82 3482-3428",
+            "location": "Jakarta, ID",
+            "work": "Accenture",
+            "facebook": "",
+            "twitter": "",
+            "linkedin": "",
+            "instagram": ""
         }
     ]
 }

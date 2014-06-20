@@ -17,10 +17,14 @@ body {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3a3a39', endColorstr='#26262b',GradientType=0 ); /* IE6-9 */
 }
 
+.main-content {
+    margin: 0;
+}
+
 .namecards-container {
-    width: 600px;
     height: 170px;
-    background-color: #3c393e;
+    margin: 10px 0;
+    padding: 0;
 }
 
 .namecards-container a:hover {
@@ -33,10 +37,11 @@ body {
     display: inline-block;
     height: 100%;
     float: left;
+    background-color: #3c393e;
 }
 
 .namecards-container .name-holder {
-    width: 185px;
+    width: 25%;
     background-color: #493843;
     text-align: center;
 }
@@ -59,7 +64,8 @@ body {
 }
 
 .namecards-container .info-holder {
-    width: 355px;
+    width: 63%;
+    min-width: 275px;
     background-color: #3f3940;
     padding: 5px;
 }
@@ -91,8 +97,12 @@ body {
     border-bottom: 1px #3276be dashed;
 }
 
-.namecards-container .socmed-holder {
-    width: 60px;
+.namecards-container .socmed-holder{
+    width: 10%;
+}
+
+.namecards-container .socmed-holder .wrapper {
+    width: 6%;
     height: 145px;
     margin-top: 12px;
     border-left: 1px #a1a0a1 solid;
@@ -118,4 +128,13 @@ body {
     -o-filter: grayscale(100%);
     -ms-filter: grayscale(100%);
     filter: grayscale(100%);
+}
+
+@media (max-width: 480px) {
+    .namecards-container .info-holder {
+        width: 75%;
+    }
+    .namecards-container .socmed-holder {
+        display: none;
+    }
 }
