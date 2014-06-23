@@ -6,7 +6,9 @@ body {
     font-family: 'Open Sans', sans-serif;
     min-height: 100%;
     color: white;
+}
 
+body, .container-fluid {
     background: #3a3a39; /* Old browsers */
     background: -moz-linear-gradient(top,  #3a3a39 0%, #26262b 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3a3a39), color-stop(100%,#26262b)); /* Chrome,Safari4+ */
@@ -133,7 +135,31 @@ body {
 @media (max-width: 480px) {
     .namecards-container .info-holder {
         width: 75%;
+        min-width: inherit;
     }
+
+    .namecards-container .info-holder div {
+        margin: 10px 5px;
+    }
+
+    .namecards-container .info-holder .header {
+        display: none;
+    }
+
+    .namecards-container .info-holder .value {
+        margin: 0px 15px;
+    }
+
+    .namecards-container .info-holder div {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
+
+    .namecards-container .info-holder div span {
+        display: inline;
+    }
+
     .namecards-container .socmed-holder {
         display: none;
     }
