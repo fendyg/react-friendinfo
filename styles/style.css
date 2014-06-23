@@ -99,6 +99,15 @@ body, .container-fluid {
     border-bottom: 1px #3276be dashed;
 }
 
+.namecards-container .info-holder div {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.namecards-container .info-holder div span {
+    display: inline;
+}
+
 .namecards-container .socmed-holder{
     width: 10%;
 }
@@ -132,7 +141,29 @@ body, .container-fluid {
     filter: grayscale(100%);
 }
 
+@media (min-width: 481px) and (max-width: 1150px) {
+    .namecards-container .name-holder.longname .fullname {
+        font-size: 16px;
+    }
+
+    .namecards-container .name-holder.longname .title {
+        font-size: 14px;
+    }
+}
+
 @media (max-width: 480px) {
+    .namecards-container .name-holder .nickname {
+        font-size: 14px;
+    }
+
+    .namecards-container .name-holder .fullname {
+        font-size: 16px;
+    }
+
+    .namecards-container .name-holder .title {
+        display: none;
+    }
+
     .namecards-container .info-holder {
         width: 75%;
         min-width: inherit;
@@ -148,16 +179,6 @@ body, .container-fluid {
 
     .namecards-container .info-holder .value {
         margin: 0px 15px;
-    }
-
-    .namecards-container .info-holder div {
-        overflow-x: scroll;
-        overflow-y: hidden;
-        white-space: nowrap;
-    }
-
-    .namecards-container .info-holder div span {
-        display: inline;
     }
 
     .namecards-container .socmed-holder {

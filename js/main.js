@@ -19,25 +19,35 @@ var NameCards = React.createClass({
         else return def;
     },
     render: function() {
-        var Person = {};
+        var Person = {},
+            cx = React.addons.classSet,
+            nameHolderClass;
+        Person.name = this.props.person.fullname;
+        Person.nickname = this.props.person.nickname;
+        Person.birthday = this.props.person.birthday;
         Person.title = this.checkExists(this.props.person.title, ' ');
         Person.email = this.checkExists(this.props.person.email, '-');
         Person.phone = this.checkExists(this.props.person.phone, '-');
         Person.location = this.checkExists(this.props.person.location, '-');
         Person.work = this.checkExists(this.props.person.work, '-');
 
+        nameHolderClass = cx({
+            'name-holder': true,
+            'longname': Person.name.length > 15
+        });
+
         return (
             <div className="namecards-container col-xs-12 col-md-6">
-                <div className="name-holder">
-                    <div className="nickname">{'{'+this.props.person.nickname+'}'}</div>
-                    <div className="fullname">{this.props.person.fullname}</div>
+                <div className={nameHolderClass}>
+                    <div className="nickname">{'{'+Person.nickname+'}'}</div>
+                    <div className="fullname">{Person.name}</div>
                     <div className="title">{Person.title}</div>
                 </div>
                 <div className="info-holder">
                     <div className="birthday">
                         <span className="glyphicon glyphicon-gift"></span>
                         <span className="header">Birthday</span>
-                        <span className="value">{this.props.person.birthday}</span>
+                        <span className="value">{Person.birthday}</span>
                     </div>
                     <div className="email">
                         <span className="glyphicon glyphicon-envelope"></span>
