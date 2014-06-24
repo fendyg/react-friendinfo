@@ -5,10 +5,26 @@
 var InputBox = React.createClass({
     render: function() {
         return (
-            <input type="text"
-            className="form-control"
-            placeholder={this.props.placeHolderText}
-            onChange={this.props.handleInputChange} />
+            <div className="input-group">
+                <input type="text"
+                    className="form-control"
+                    placeholder={this.placeHolderText}
+                    onChange={this.props.handleInputChange}
+                />
+                <span className="input-group-addon">
+                    <span className="glyphicon glyphicon-search"></span>
+                </span>
+            </div>
+        );
+    }
+});
+
+var HeaderBar = React.createClass({
+    render: function() {
+        return (
+            <section className="header-bar">
+                <h1>ReactFriendlist</h1>
+            </section>
         );
     }
 });
@@ -22,6 +38,7 @@ var NameCards = React.createClass({
         var Person = {},
             cx = React.addons.classSet,
             nameHolderClass;
+
         Person.name = this.props.person.fullname;
         Person.nickname = this.props.person.nickname;
         Person.birthday = this.props.person.birthday;
@@ -30,6 +47,7 @@ var NameCards = React.createClass({
         Person.phone = this.checkExists(this.props.person.phone, '-');
         Person.location = this.checkExists(this.props.person.location, '-');
         Person.work = this.checkExists(this.props.person.work, '-');
+        Person.facebook =
 
         nameHolderClass = cx({
             'name-holder': true,
@@ -111,15 +129,6 @@ var ListContainer = React.createClass({
         }
     },
 
-    componentDidMount: function(){
-        $.get('/data/birthday.json', function(result) {
-            this.setState({
-                birthdayJSON: result.data,
-                resultSet: result.data
-            });
-        }.bind(this));
-    },
-
     handleInputChange: function(e){
         var query = e.target.value,
             filteredResult = _.filter(this.state.birthdayJSON, function(current) {
@@ -129,16 +138,29 @@ var ListContainer = React.createClass({
         this.setState({resultSet: filteredResult});
     },
 
+    componentDidMount: function(){
+        $.get('/data/birthday.json', function(result) {
+            this.setState({
+                birthdayJSON: result.data,
+                resultSet: result.data
+            });
+        }.bind(this));
+    },
+
     render: function() {
         var placeholderText = "Type a name..";
 
         return (
             <div>
-                <InputBox
-                    placeHolderText={placeholderText}
-                    handleInputChange={this.handleInputChange}
-                />
-                <MainContent resultSet={this.state.resultSet} />
+                <header>
+                    <HeaderBar />
+                    <InputBox
+                        handleInputChange={this.handleInputChange}
+                    />
+                </header>
+                <section className="container-fluid">
+                    <MainContent resultSet={this.state.resultSet} />
+                </section>
             </div>
         );
     }
@@ -146,5 +168,5 @@ var ListContainer = React.createClass({
 
 React.renderComponent(
     <ListContainer />,
-    document.getElementById('container')
+    document.body
 );
