@@ -41,6 +41,48 @@
             "twitter": "",
             "linkedin": "",
             "instagram": ""
+        },
+        {
+            "fullname": "Daniel Longlegs Macdonnald",
+            "nickname": "danny",
+            "title": "Software Analyst",
+            "birthday": "21 January 1990",
+            "email": "dann_dan@andy.com",
+            "phone": "",
+            "location": "Chicago, USA",
+            "work": "Wearables, Inc.",
+            "facebook": "",
+            "twitter": "",
+            "linkedin": "",
+            "instagram": ""
+        },
+        {
+            "fullname": "Emma Jones Stone",
+            "nickname": "estone",
+            "title": "Front End Developer",
+            "birthday": "12 January 1990",
+            "email": "",
+            "phone": "+1 245 565-5656",
+            "location": "Kuala Lumpur, MY",
+            "work": "",
+            "facebook": "",
+            "twitter": "",
+            "linkedin": "",
+            "instagram": ""
+        },
+        {
+            "fullname": "Frank Happykid",
+            "nickname": "francis",
+            "title": "Senator",
+            "birthday": "23 January 1990",
+            "email": "frank@frank.gov",
+            "phone": "+1 222 324-322",
+            "location": "Pennsylvania, USA",
+            "work": "Accenture",
+            "facebook": "",
+            "twitter": "",
+            "linkedin": "",
+            "instagram": ""
         }
     ]
 }

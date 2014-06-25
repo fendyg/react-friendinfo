@@ -139,7 +139,7 @@ var ListContainer = React.createClass({
     },
 
     componentDidMount: function(){
-        $.get('/data/birthday.json', function(result) {
+        $.get('data/birthday.json', function(result) {
             this.setState({
                 birthdayJSON: result.data,
                 resultSet: result.data
