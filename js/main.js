@@ -106,7 +106,14 @@ var NameCards = React.createClass({
 var MainContent = React.createClass({
     render: function(){
         var rows = [];
-        if(typeof this.props.resultSet === 'object') {
+        if (typeof this.props.resultSet === 'string') {
+            rows.push(
+                <div className="loading-animation">
+                    <div className="gif"></div>
+                </div>
+            );
+        }
+        else if(typeof this.props.resultSet === 'object') {
             this.props.resultSet.forEach(function(person){
                 rows.push(
                     <NameCards person={person} />
@@ -125,7 +132,7 @@ var MainContent = React.createClass({
 var ListContainer = React.createClass({
     getInitialState: function(){
         return {
-            resultSet: 'Loading data..',
+            resultSet: 'loading',
         }
     },
 
@@ -139,12 +146,20 @@ var ListContainer = React.createClass({
     },
 
     componentDidMount: function(){
-        $.get('/data/birthday.json', function(result) {
-            this.setState({
-                birthdayJSON: result.data,
-                resultSet: result.data
+        var that = this;
+
+        function onDataLoad(data){
+            that.setState({
+                birthdayJSON: data,
+                resultSet: data
             });
-        }.bind(this));
+        }
+
+        Tabletop.init({
+            key: SPREADSHEET_KEY,
+            callback: onDataLoad,
+            simpleSheet: true
+        });
     },
 
     render: function() {

@@ -47,6 +47,18 @@ header .header-bar h1{
     margin: 0;
 }
 
+.loading-animation {
+    margin: 20px;
+    margin-left: 50%;
+}
+
+.loading-animation .gif {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-image: url(../images/loading.gif);
+}
+
 .namecards-container {
     height: 170px;
     margin: 10px 0;
