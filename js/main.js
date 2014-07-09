@@ -1,6 +1,7 @@
 /**
  * @jsx React.DOM
  */
+var cx = React.addons.classSet;
 
 var InputBox = React.createClass({
     render: function() {
@@ -29,6 +30,41 @@ var HeaderBar = React.createClass({
     }
 });
 
+var SocMedAnchor = React.createClass({
+    classGetter: function(isDisabled) {
+        var obj = {},
+            type = this.props.type;
+
+        obj.icon = true;
+        obj[type] = true;
+        obj.disabled = isDisabled;
+
+        return obj;
+    },
+    render: function(){
+        var classHolder,
+            anchorHolder = [],
+            isDisabled = this.props.link.length === 0,
+            link = "http://"+this.props.type+".com/"+this.props.link;
+
+        classHolder = cx(this.classGetter(isDisabled));
+
+        if(isDisabled) {
+            anchorHolder.push(
+                <span className={classHolder}></span>
+            );
+        } else {
+            anchorHolder.push(
+                <a className={classHolder} href={link}></a>
+            );
+        }
+
+        return (
+            <div className="socmed-link-wrapper">{anchorHolder}</div>
+        );
+    }
+});
+
 var NameCards = React.createClass({
     checkExists: function(param, def) {
         if(param) return param;
@@ -36,7 +72,6 @@ var NameCards = React.createClass({
     },
     render: function() {
         var Person = {},
-            cx = React.addons.classSet,
             nameHolderClass;
 
         Person.name = this.props.person.fullname;
@@ -47,7 +82,10 @@ var NameCards = React.createClass({
         Person.phone = this.checkExists(this.props.person.phone, '-');
         Person.location = this.checkExists(this.props.person.location, '-');
         Person.work = this.checkExists(this.props.person.work, '-');
-        Person.facebook =
+        Person.facebook = this.props.person.facebook;
+        Person.twitter = this.props.person.twitter;
+        Person.linkedin = this.props.person.linkedin;
+        Person.instagram = this.props.person.instagram;
 
         nameHolderClass = cx({
             'name-holder': true,
@@ -92,10 +130,10 @@ var NameCards = React.createClass({
                 </div>
                 <div className="socmed-holder">
                     <div className="wrapper">
-                        <a className="icon facebook" href="facebook.com/user"></a>
-                        <a className="icon twitter" href="twitter.com/user"></a>
-                        <a className="icon linkedin" href="linkedin.com/in/user"></a>
-                        <a className="icon instagram disabled" href="instagram.com/user"></a>
+                        <SocMedAnchor type="facebook" link={Person.facebook}/>
+                        <SocMedAnchor type="twitter" link={Person.twitter}/>
+                        <SocMedAnchor type="linkedin" link={Person.linkedin}/>
+                        <SocMedAnchor type="instagram" link={Person.instagram}/>
                     </div>
                 </div>
             </div>
