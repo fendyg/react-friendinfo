@@ -59,6 +59,24 @@ header .header-bar h1{
     background-image: url(../images/loading.gif);
 }
 
+.namecards-enter {
+    opacity: 0.01;
+    transition: opacity .2s ease-in;
+}
+
+.namecards-enter.namecards-enter-active {
+    opacity: 1;
+}
+
+.namecards-leave {
+    opacity: 1;
+    transition: opacity .2s ease-in;
+}
+
+.namecards-leave.namecards-leave-active {
+    opacity: 0.01;
+}
+
 .namecards-container {
     height: 170px;
     margin: 10px 0;

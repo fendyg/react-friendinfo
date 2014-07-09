@@ -1,7 +1,10 @@
 /**
  * @jsx React.DOM
  */
+
 var cx = React.addons.classSet;
+var reactTransition = React.addons.CSSTransitionGroup;
+
 
 var InputBox = React.createClass({
     render: function() {
@@ -161,7 +164,9 @@ var MainContent = React.createClass({
 
         return (
             <div className="main-content row">
-                {rows}
+                <reactTransition transitionName="namecards">
+                    {rows}
+                </reactTransition>
             </div>
         );
     }
