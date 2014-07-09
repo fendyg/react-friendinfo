@@ -8,7 +8,7 @@ var InputBox = React.createClass({
             <div className="input-group">
                 <input type="text"
                     className="form-control"
-                    placeholder={this.placeHolderText}
+                    placeholder={INPUT_PLACEHOLDER_TXT}
                     onChange={this.props.handleInputChange}
                 />
                 <span className="input-group-addon">
@@ -23,7 +23,7 @@ var HeaderBar = React.createClass({
     render: function() {
         return (
             <section className="header-bar">
-                <h1>ReactFriendlist</h1>
+                <h1>{SITE_TITLE}</h1>
             </section>
         );
     }
@@ -132,7 +132,7 @@ var MainContent = React.createClass({
 var ListContainer = React.createClass({
     getInitialState: function(){
         return {
-            resultSet: 'loading',
+            resultSet: LOADING_STRING,
         }
     },
 
@@ -163,8 +163,6 @@ var ListContainer = React.createClass({
     },
 
     render: function() {
-        var placeholderText = "Type a name..";
-
         return (
             <div>
                 <header>
