@@ -5,6 +5,8 @@
 var cx = React.addons.classSet,
     reactTransition = React.addons.CSSTransitionGroup;
 
+// Input text box class, on text input from user filters the page based on the
+// text that are entered
 var InputBox = React.createClass({
     render: function() {
         return (
@@ -22,6 +24,7 @@ var InputBox = React.createClass({
     }
 });
 
+// Header bar class, page title goes here
 var HeaderBar = React.createClass({
     render: function() {
         return (
@@ -32,6 +35,7 @@ var HeaderBar = React.createClass({
     }
 });
 
+// Social media icon class, renders icons and links to each namecards
 var SocMedAnchor = React.createClass({
     classGetter: function(isDisabled) {
         var obj = {},
@@ -67,6 +71,8 @@ var SocMedAnchor = React.createClass({
     }
 });
 
+// Name cards class, parse all user information and render them to the page
+// until a specific limit is met
 var NameCards = React.createClass({
     checkExists: function(param, def) {
         if(param) return param;
@@ -143,6 +149,8 @@ var NameCards = React.createClass({
     }
 });
 
+// Pagination class, renders the pagination dynamically if there are more than
+// a specific number of elements in the page
 var Pagination = React.createClass({
     render: function(){
         var maxPage = this.props.maxPage,
@@ -150,7 +158,7 @@ var Pagination = React.createClass({
             numbers = [],
             numbersClass;
 
-        //Render back arrow, if current page is at one, then disable click
+        // Render back arrow, if current page is at the first page, then disable click
         if (currentPage===1) {
             numbers.push(
                 <li className="disabled">
@@ -179,7 +187,7 @@ var Pagination = React.createClass({
             );
         };
 
-        //Render forward arrow, if current page == max page, then disable click
+        // Render forward arrow, if current page == max page, then disable click
         if(currentPage === maxPage) {
             numbers.push(
                 <li className="disabled">
@@ -204,6 +212,7 @@ var Pagination = React.createClass({
     }
 });
 
+// MainContent, parent class for NameCards and Pagination class
 var MainContent = React.createClass({
     render: function(){
         var rows = [],
@@ -212,9 +221,9 @@ var MainContent = React.createClass({
             resultSet = this.props.resultSet,
             currentPage = this.props.currentPage,
             count = resultSet.length,
-            endIndex = currentPage * 20,
-            startIndex = endIndex - 20,
-            lastPage = Math.ceil(count/20);
+            endIndex = currentPage * NAMECARDS_LIMIT,
+            startIndex = endIndex - NAMECARDS_LIMIT,
+            lastPage = Math.ceil(count / NAMECARDS_LIMIT);
 
         if (currentPage === lastPage) {
             visibleItemsArray = resultSet.slice(startIndex);
@@ -222,6 +231,7 @@ var MainContent = React.createClass({
             visibleItemsArray=resultSet.slice(startIndex, endIndex);
         }
 
+        // On first load, shows animation gif while data is retrieved
         if (typeof resultSet === 'string') {
             rows.push(
                 <div className="loading-animation">
@@ -229,6 +239,8 @@ var MainContent = React.createClass({
                 </div>
             );
         }
+        // After data is loaded, renders namecards to the page based on selected
+        // current page
         else if(typeof resultSet === 'object') {
             visibleItemsArray.forEach(function(person){
                 rows.push(
@@ -237,7 +249,8 @@ var MainContent = React.createClass({
             });
         }
 
-        if(count>20){
+        // If the displayed namecards is more than the set limit, renders pagination
+        if(count > NAMECARDS_LIMIT){
             pagination.push(
                 <Pagination
                     onClick={this.props.handlePaginationChange}
@@ -258,7 +271,10 @@ var MainContent = React.createClass({
     }
 });
 
+// ListContainer class is the main class of the site, holds all the states and
+// renders every subclasses
 var ListContainer = React.createClass({
+    // Set initial state for result set and current page at first load
     getInitialState: function(){
         return {
             resultSet: LOADING_STRING,
@@ -266,6 +282,7 @@ var ListContainer = React.createClass({
         }
     },
 
+    // Input text box on change handler, filters the data according to user input
     handleInputChange: function(e){
         var query = e.target.value,
             filteredResult = _.filter(this.state.birthdayJSON, function(current) {
@@ -276,6 +293,7 @@ var ListContainer = React.createClass({
         this.setState({resultSet: filteredResult});
     },
 
+    // Pagination on click handler, set displayed page according to user input
     handlePaginationChange: function(e){
         var newPage = e.target.innerHTML,
             currentPage = this.state.currentPage;
@@ -293,6 +311,8 @@ var ListContainer = React.createClass({
     componentDidMount: function(){
         var that = this;
 
+        // Called after data is finished loading, populate states with the
+        // returned data
         function onDataLoad(data){
             that.setState({
                 birthdayJSON: data,
@@ -300,6 +320,7 @@ var ListContainer = React.createClass({
             });
         }
 
+        // Tabletop.js call, get data from the specified google spreadsheet key
         Tabletop.init({
             key: SPREADSHEET_KEY,
             callback: onDataLoad,
