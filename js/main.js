@@ -2,9 +2,8 @@
  * @jsx React.DOM
  */
 
-var cx = React.addons.classSet;
-var reactTransition = React.addons.CSSTransitionGroup;
-
+var cx = React.addons.classSet,
+    reactTransition = React.addons.CSSTransitionGroup;
 
 var InputBox = React.createClass({
     render: function() {
@@ -144,27 +143,114 @@ var NameCards = React.createClass({
     }
 });
 
+var Pagination = React.createClass({
+    render: function(){
+        var maxPage = this.props.maxPage,
+            currentPage = this.props.currentPage,
+            numbers = [],
+            numbersClass;
+
+        //Render back arrow, if current page is at one, then disable click
+        if (currentPage===1) {
+            numbers.push(
+                <li className="disabled">
+                    <a>&laquo;</a>
+                </li>
+            );
+        } else {
+            numbers.push(
+                <li>
+                    <a onClick={this.props.onClick}>&laquo;</a>
+                </li>
+            );
+        }
+
+        //Render pagination numbers
+        for (var i = 1; i <= maxPage; i++) {
+            numbersClass = cx({
+                'pagination-items': true,
+                'active': i === currentPage
+            });
+
+            numbers.push(
+                <li className={numbersClass}>
+                    <a onClick={this.props.onClick}>{i}</a>
+                </li>
+            );
+        };
+
+        //Render forward arrow, if current page == max page, then disable click
+        if(currentPage === maxPage) {
+            numbers.push(
+                <li className="disabled">
+                    <a>&raquo;</a>
+                </li>
+            );
+        } else {
+            numbers.push(
+                <li>
+                    <a onClick={this.props.onClick}>&raquo;</a>
+                </li>
+            );
+        }
+
+        return (
+            <div className="row">
+                <ul className="main-pagination pagination">
+                    {numbers}
+                </ul>
+            </div>
+        );
+    }
+});
+
 var MainContent = React.createClass({
     render: function(){
-        var rows = [];
-        if (typeof this.props.resultSet === 'string') {
+        var rows = [],
+            pagination = [],
+            visibleItemsArray,
+            resultSet = this.props.resultSet,
+            currentPage = this.props.currentPage,
+            count = resultSet.length,
+            endIndex = currentPage * 20,
+            startIndex = endIndex - 20,
+            lastPage = Math.ceil(count/20);
+
+        if (currentPage === lastPage) {
+            visibleItemsArray = resultSet.slice(startIndex);
+        } else {
+            visibleItemsArray=resultSet.slice(startIndex, endIndex);
+        }
+
+        if (typeof resultSet === 'string') {
             rows.push(
                 <div className="loading-animation">
                     <div className="gif"></div>
                 </div>
             );
         }
-        else if(typeof this.props.resultSet === 'object') {
-            this.props.resultSet.forEach(function(person){
+        else if(typeof resultSet === 'object') {
+            visibleItemsArray.forEach(function(person){
                 rows.push(
                     <NameCards person={person} />
                 );
             });
         }
 
+        if(count>20){
+            pagination.push(
+                <Pagination
+                    onClick={this.props.handlePaginationChange}
+                    currentPage = {currentPage}
+                    maxPage={lastPage}
+                />
+            );
+        }
+
         return (
             <div className="main-content row">
                 <reactTransition transitionName="namecards">
+                    {pagination}
                     {rows}
                 </reactTransition>
             </div>
@@ -176,6 +262,7 @@ var ListContainer = React.createClass({
     getInitialState: function(){
         return {
             resultSet: LOADING_STRING,
+            currentPage: 1
         }
     },
 
@@ -185,7 +272,22 @@ var ListContainer = React.createClass({
                 return _.any(filterConditions, _.invokeWith(current, query));
             });
 
+        this.setState({currentPage: 1});
         this.setState({resultSet: filteredResult});
+    },
+
+    handlePaginationChange: function(e){
+        var newPage = e.target.innerHTML,
+            currentPage = this.state.currentPage;
+
+        e.preventDefault();
+        if(newPage === '«' && currentPage !== 1) {
+            this.setState({currentPage: (currentPage-1) });
+        } else if(newPage==='»' && currentPage >= 1) {
+            this.setState({currentPage: (currentPage+1) });
+        } else {
+            this.setState({currentPage: parseInt(newPage)});
+        }
     },
 
     componentDidMount: function(){
@@ -215,7 +317,11 @@ var ListContainer = React.createClass({
                     />
                 </header>
                 <section className="container-fluid">
-                    <MainContent resultSet={this.state.resultSet} />
+                    <MainContent
+                        resultSet={this.state.resultSet}
+                        currentPage={this.state.currentPage}
+                        handlePaginationChange={this.handlePaginationChange}
+                    />
                 </section>
             </div>
         );

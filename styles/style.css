@@ -61,41 +61,25 @@ header .header-bar h1{
 
 .namecards-enter,
 .namecards-leave {
-    -webkit-transition: all 0.2s ease-in;
-       -moz-transition: all 0.2s ease-in;
-            transition: all 0.2s ease-in;
+    -webkit-transition: opacity 0.2s ease-in;
+       -moz-transition: opacity 0.2s ease-in;
+            transition: opacity 0.2s ease-in;
 }
 
 .namecards-enter {
     opacity: 0.01;
-    -webkit-transform: scale(0);
-       -moz-transform: scale(0);
-        -ms-transform: scale(0);
-            transform: scale(0);
 }
 
 .namecards-enter.namecards-enter-active {
     opacity: 1;
-    -webkit-transform: scale(1);
-       -moz-transform: scale(1);
-        -ms-transform: scale(1);
-            transform: scale(1);
 }
 
 .namecards-leave {
     opacity: 1;
-    -webkit-transform: scale(1);
-       -moz-transform: scale(1);
-        -ms-transform: scale(1);
-            transform: scale(1);
 }
 
 .namecards-leave.namecards-leave-active {
     opacity: 0.01;
-    -webkit-transform: scale(0);
-       -moz-transform: scale(0);
-        -ms-transform: scale(0);
-            transform: scale(0);
 }
 
 .namecards-container {
