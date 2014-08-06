@@ -25,6 +25,23 @@ header .input-group {
     border-bottom: 1px #000 solid;
 }
 
+header .input-group .clear-text {
+    content: "";
+    position: absolute;
+    cursor: pointer;
+    cursor: hand;
+    border: transparent;
+    background: transparent;
+    color: #999;
+    top: 24px;
+    right: 60px;
+    z-index: 10;
+}
+
+.search-textbox:not(:valid) ~ .clear-text {
+    display: none;
+}
+
 header .header-bar {
     height: 50px;
     background: #252628; /* Old browsers */
@@ -199,6 +216,10 @@ header .header-bar h1{
     -o-filter: grayscale(100%);
     -ms-filter: grayscale(100%);
     filter: grayscale(100%);
+}
+
+.pagination > li > a {
+    cursor: pointer;
 }
 
 @media (min-width: 481px) and (max-width: 1150px) {

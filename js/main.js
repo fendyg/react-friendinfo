@@ -11,11 +11,19 @@ var InputBox = React.createClass({
     render: function() {
         return (
             <div className="input-group">
-                <input type="text"
-                    className="form-control"
-                    placeholder={INPUT_PLACEHOLDER_TXT}
-                    onChange={this.props.handleInputChange}
-                />
+                <form>
+                    <input type="text"
+                        required
+                        className="form-control search-textbox"
+                        placeholder={INPUT_PLACEHOLDER_TXT}
+                        onChange={this.props.handleInputChange}
+                    />
+                    <button
+                        type="reset"
+                        onClick={this.props.handleInputChange}
+                        className="clear-text glyphicon glyphicon-remove-circle">
+                    </button>
+                </form>
                 <span className="input-group-addon">
                     <span className="glyphicon glyphicon-search"></span>
                 </span>
